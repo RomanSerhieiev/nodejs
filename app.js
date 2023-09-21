@@ -32,11 +32,11 @@ app.get('/users/:userId', async (req, res) => {
 app.post('/users', async (req, res) => {
     const { name, age } = req.body;
 
-    if (name.length <= 3) {
+    if (!name || name.length <= 3) {
         return res.status(400).json('Ім\'я повинно бути більше 3 символів.');
     }
 
-    if (age <= 0) {
+    if (!age || age <= 0) {
         return res.status(400).json('Вік має бути більше 0.');
     }
 
