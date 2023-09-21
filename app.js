@@ -1,5 +1,5 @@
-const {createDirsAndFiles} = require('./createDirsAndFiles');
-const {listDirsAndFiles} = require('./listDirsAndFiles');
+const { createDirsAndFiles } = require('./createDirsAndFiles');
+const { listDirsAndFiles } = require('./listDirsAndFiles');
 
 createDirsAndFiles().then(() => {
     listDirsAndFiles().then();

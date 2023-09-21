@@ -1,5 +1,5 @@
-const {readdir, stat} = require('node:fs/promises');
-const {join} = require('node:path');
+const { readdir, stat } = require('node:fs/promises');
+const { join } = require('node:path');
 
 const listDirsAndFiles = async () => {
     try {
@@ -8,7 +8,7 @@ const listDirsAndFiles = async () => {
 
         for (const item of items) {
             const stats = await stat(join(baseFolderPath, item));
-            console.log(stats.isFile() ? 'FILE:' : 'FOLDER:', item)
+            console.log(stats.isFile() ? 'FILE:' : 'FOLDER:', item);
         }
     } catch (err) {
         throw new Error(err.message);
