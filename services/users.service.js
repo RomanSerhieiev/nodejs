@@ -4,8 +4,7 @@ const { urls, baseURL } = require('../constants/urls');
 
 const usersService = {
     get: async () => {
-        const buffer = await readFile(join(baseURL, urls.users.base));
-        const json = buffer.toString();
+        const json = await readFile(join(baseURL, urls.users.base), {encoding: 'utf-8'});
         return json ? JSON.parse(json) : [];
     },
     post: async (users) => {
