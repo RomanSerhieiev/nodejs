@@ -7,14 +7,8 @@ const listDirsAndFiles = async () => {
         const items = await readdir(baseFolderPath);
 
         for (const item of items) {
-            const itemPath = join(baseFolderPath, item);
-            const stats = await stat(itemPath);
-
-            if (stats.isDirectory()) {
-                console.log(`FOLDER: ${item}`);
-            } else if (stats.isFile()) {
-                console.log(`FILE: ${item}`);
-            }
+            const stats = await stat(join(baseFolderPath, item));
+            console.log(stats.isFile() ? 'FILE:' : 'FOLDER:', item)
         }
     } catch (err) {
         throw new Error(err.message);
