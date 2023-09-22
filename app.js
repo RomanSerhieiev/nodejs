@@ -73,7 +73,7 @@ app.patch('/users/:userId', async (req, res) => {
     const { userId } = req.params;
     const { name, age } = req.body;
 
-    if (name && name.length <= 5) {
+    if (name && name.length <= 3) {
         return res.status(400).json('Ім\'я повинно бути більше 3 символів.');
     }
 
