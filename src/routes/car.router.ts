@@ -3,32 +3,37 @@ import { Router } from "express";
 import { carController } from "../controllers/car.controller";
 import { carMiddleware } from "../middlewares/car.middleware";
 import { commonMiddleware } from "../middlewares/common.middleware";
+import { CarValidator } from "../validators/car.validator";
 
 const router = Router();
 
-router.get("", carController.findAll);
+router.get("/", carController.findAll);
 
 router.get(
   "/:id",
-  commonMiddleware.checkId,
-  carMiddleware.findByIdOrTrow,
+  commonMiddleware.isIdValid("id"),
+  carMiddleware.findById,
   carController.findById,
 );
 
-router.post("", carMiddleware.createValidate, carController.create);
+router.post(
+  "/",
+  commonMiddleware.isBodyValid(CarValidator.create),
+  carController.create,
+);
 
 router.put(
   "/:id",
-  commonMiddleware.checkId,
-  carMiddleware.updateValidate,
-  carMiddleware.findByIdAndUpdateOrTrow,
+  commonMiddleware.isIdValid("id"),
+  commonMiddleware.isBodyValid(CarValidator.update),
+  carMiddleware.findByIdAndUpdate,
   carController.findByIdAndUpdate,
 );
 
 router.delete(
   "/:id",
-  commonMiddleware.checkId,
-  carMiddleware.findByIdAndDeleteOrTrow,
+  commonMiddleware.isIdValid("id"),
+  carMiddleware.findByIdAndDelete,
   carController.findByIdAndDelete,
 );
 

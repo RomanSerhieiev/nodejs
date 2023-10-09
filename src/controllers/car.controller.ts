@@ -27,9 +27,7 @@ class CarController {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const value = res.locals;
-
-      const car = await carService.create(value);
+      const car = await carService.create(req.body);
 
       return res.json(car);
     } catch (e) {

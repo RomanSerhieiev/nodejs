@@ -31,9 +31,7 @@ class UserController {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const value = res.locals;
-
-      const user = await userService.create(value);
+      const user = await userService.create(req.body);
 
       return res.json(user);
     } catch (e) {
