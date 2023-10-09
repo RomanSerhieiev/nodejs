@@ -6,7 +6,11 @@ import { ApiError } from "../errors/api.error";
 
 class CommonMiddleware {
   isIdValid(field: string) {
-    return async (req: Request, res: Response, next: NextFunction) => {
+    return async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ): Promise<void> => {
       try {
         const id = req.params[field];
         if (!mongoose.isObjectIdOrHexString(id)) {
@@ -21,7 +25,11 @@ class CommonMiddleware {
   }
 
   isBodyValid(Validator: ObjectSchema) {
-    return async (req: Request, res: Response, next: NextFunction) => {
+    return async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ): Promise<void> => {
       try {
         const { error, value } = Validator.validate(req.body);
         if (error) {

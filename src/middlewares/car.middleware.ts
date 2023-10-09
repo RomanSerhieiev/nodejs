@@ -4,7 +4,11 @@ import { ApiError } from "../errors/api.error";
 import { carService } from "../services/car.service";
 
 class CarMiddleware {
-  async findById(req: Request, res: Response, next: NextFunction) {
+  async findById(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
       const { id } = req.params;
 
@@ -25,7 +29,7 @@ class CarMiddleware {
     req: Request,
     res: Response,
     next: NextFunction,
-  ) {
+  ): Promise<void> {
     try {
       const { id } = req.params;
 
@@ -33,6 +37,8 @@ class CarMiddleware {
       if (!car) {
         throw new ApiError("Car not found", 404);
       }
+
+      res.locals = car;
 
       next();
     } catch (e) {
@@ -44,7 +50,7 @@ class CarMiddleware {
     req: Request,
     res: Response,
     next: NextFunction,
-  ) {
+  ): Promise<void> {
     try {
       const { id } = req.params;
 
@@ -52,6 +58,8 @@ class CarMiddleware {
       if (!car) {
         throw new ApiError("Car not found", 404);
       }
+
+      res.locals = car;
 
       next();
     } catch (e) {

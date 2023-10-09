@@ -18,7 +18,7 @@ class CarRepository {
     }
   }
 
-  async create(value: any) {
+  async create(value: any): Promise<any> {
     try {
       return await Car.create(value);
     } catch (e) {
@@ -26,7 +26,7 @@ class CarRepository {
     }
   }
 
-  async findByIdAndUpdate(id: string, value: any) {
+  async findByIdAndUpdate(id: string, value: any): Promise<ICar> {
     try {
       return await Car.findByIdAndUpdate(id, value, {
         returnDocument: "after",
@@ -36,7 +36,7 @@ class CarRepository {
     }
   }
 
-  async findByIdAndDelete(id: string) {
+  async findByIdAndDelete(id: string): Promise<ICar> {
     try {
       return await Car.findByIdAndDelete(id);
     } catch (e) {

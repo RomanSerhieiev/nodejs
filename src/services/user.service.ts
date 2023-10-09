@@ -18,7 +18,7 @@ class UserService {
     }
   }
 
-  async create(value: any) {
+  async create(value: any): Promise<any> {
     try {
       return await userRepository.create(value);
     } catch (e) {
@@ -26,7 +26,7 @@ class UserService {
     }
   }
 
-  async findByIdAndUpdate(id: string, value: any) {
+  async findByIdAndUpdate(id: string, value: any): Promise<IUser> {
     try {
       return await userRepository.findByIdAndUpdate(id, value);
     } catch (e) {
@@ -34,7 +34,7 @@ class UserService {
     }
   }
 
-  async findByIdAndDelete(id: string) {
+  async findByIdAndDelete(id: string): Promise<IUser> {
     try {
       return await userRepository.findByIdAndDelete(id);
     } catch (e) {

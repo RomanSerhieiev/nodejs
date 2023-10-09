@@ -29,7 +29,7 @@ class UserController {
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req: Request, res: Response, next: NextFunction): TRes<any> {
     try {
       const user = await userService.create(req.body);
 
@@ -39,17 +39,29 @@ class UserController {
     }
   }
 
-  async findByIdAndUpdate(req: Request, res: Response, next: NextFunction) {
+  async findByIdAndUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): TRes<IUser> {
     try {
-      return res.json("User updated successfully");
+      const user = res.locals;
+
+      return res.json(user);
     } catch (e) {
       next(e);
     }
   }
 
-  async findByIdAndDelete(req: Request, res: Response, next: NextFunction) {
+  async findByIdAndDelete(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
-      return res.json("User deleted successfully");
+      const user = res.locals;
+
+      res.json(user);
     } catch (e) {
       next(e);
     }

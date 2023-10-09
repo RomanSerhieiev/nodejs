@@ -25,7 +25,7 @@ class CarController {
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req: Request, res: Response, next: NextFunction): TRes<any> {
     try {
       const car = await carService.create(req.body);
 
@@ -35,17 +35,29 @@ class CarController {
     }
   }
 
-  async findByIdAndUpdate(req: Request, res: Response, next: NextFunction) {
+  async findByIdAndUpdate(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): TRes<ICar> {
     try {
-      return res.json("Car updated successfully");
+      const car = res.locals;
+
+      return res.json(car);
     } catch (e) {
       next(e);
     }
   }
 
-  async findByIdAndDelete(req: Request, res: Response, next: NextFunction) {
+  async findByIdAndDelete(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
     try {
-      return res.json("Car deleted successfully");
+      const car = res.locals;
+
+      res.json(car);
     } catch (e) {
       next(e);
     }
