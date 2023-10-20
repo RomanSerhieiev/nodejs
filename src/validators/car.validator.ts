@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-import { EConditions } from "../enums/condition";
+import { EConditions } from "../enums/condition.enum";
 
 export class CarValidator {
   static price = Joi.number().min(0);

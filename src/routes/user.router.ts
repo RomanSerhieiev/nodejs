@@ -1,40 +1,41 @@
 import { Router } from "express";
 
-import { userController } from "../controllers/user.controller";
+import { commonController } from "../controllers/common.controller";
+import { IUser } from "../interfaces/user.interface";
 import { commonMiddleware } from "../middlewares/common.middleware";
-import { userMiddleware } from "../middlewares/user.middleware";
+import { User } from "../models/User.model";
 import { UserValidator } from "../validators/user.validator";
 
 const router = Router();
 
-router.get("/", userController.findAll);
+router.get("/", commonController.findAll<IUser>(User));
 
 router.get(
   "/:id",
   commonMiddleware.isIdValid("id"),
-  userMiddleware.findById,
-  userController.findById,
+  commonMiddleware.findById<IUser>(User),
+  commonController.findById<IUser>,
 );
 
 router.post(
   "/",
   commonMiddleware.isBodyValid(UserValidator.create),
-  userController.create,
+  commonController.create<IUser>(User),
 );
 
 router.put(
   "/:id",
   commonMiddleware.isIdValid("id"),
   commonMiddleware.isBodyValid(UserValidator.update),
-  userMiddleware.findByIdAndUpdate,
-  userController.findByIdAndUpdate,
+  commonMiddleware.updateById<IUser>(User),
+  commonController.findByIdAndUpdate,
 );
 
 router.delete(
   "/:id",
   commonMiddleware.isIdValid("id"),
-  userMiddleware.findByIdAndDelete,
-  userController.findByIdAndDelete,
+  commonMiddleware.deleteById<IUser>(User),
+  commonController.findByIdAndDelete,
 );
 
 export const userRouter = router;

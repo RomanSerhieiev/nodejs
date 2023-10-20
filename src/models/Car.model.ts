@@ -1,10 +1,11 @@
-import { model, Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 
-import { EConditions } from "../enums/condition";
+import { EConditions } from "../enums/condition.enum";
+import { ICar } from "../interfaces/car.interface";
 
-export const Car = model(
+export const Car: Model<ICar> = model(
   "car",
-  new Schema(
+  new Schema<ICar>(
     {
       price: {
         type: Number,

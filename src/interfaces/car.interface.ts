@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 
-import { EConditions } from "../enums/condition";
+import { EConditions } from "../enums/condition.enum";
 
 export interface ICar extends Document {
   price?: number;

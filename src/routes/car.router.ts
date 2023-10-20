@@ -1,40 +1,41 @@
 import { Router } from "express";
 
-import { carController } from "../controllers/car.controller";
-import { carMiddleware } from "../middlewares/car.middleware";
+import { commonController } from "../controllers/common.controller";
+import { ICar } from "../interfaces/car.interface";
 import { commonMiddleware } from "../middlewares/common.middleware";
+import { Car } from "../models/Car.model";
 import { CarValidator } from "../validators/car.validator";
 
 const router = Router();
 
-router.get("/", carController.findAll);
+router.get("/", commonController.findAll<ICar>(Car));
 
 router.get(
   "/:id",
   commonMiddleware.isIdValid("id"),
-  carMiddleware.findById,
-  carController.findById,
+  commonMiddleware.findById<ICar>(Car),
+  commonController.findById<ICar>,
 );
 
 router.post(
   "/",
   commonMiddleware.isBodyValid(CarValidator.create),
-  carController.create,
+  commonController.create<ICar>(Car),
 );
 
 router.put(
   "/:id",
   commonMiddleware.isIdValid("id"),
   commonMiddleware.isBodyValid(CarValidator.update),
-  carMiddleware.findByIdAndUpdate,
-  carController.findByIdAndUpdate,
+  commonMiddleware.updateById<ICar>(Car),
+  commonController.findByIdAndUpdate,
 );
 
 router.delete(
   "/:id",
   commonMiddleware.isIdValid("id"),
-  carMiddleware.findByIdAndDelete,
-  carController.findByIdAndDelete,
+  commonMiddleware.deleteById<ICar>(Car),
+  commonController.findByIdAndDelete,
 );
 
 export const carRouter = router;

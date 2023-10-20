@@ -1,10 +1,11 @@
-import { model, Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 
 import { EGenders } from "../enums/genders.enum";
+import { IUser } from "../interfaces/user.interface";
 
-export const User = model(
+export const User: Model<IUser> = model(
   "user",
-  new Schema(
+  new Schema<IUser>(
     {
       name: {
         type: String,
